@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    height: 60px;
+    background-color: #242629;
+    padding: 0 30px;
+}
+
+.exchangeRate {
+   display: flex;
+}
+.exchangeRate-item {
+    margin: 0 15px;
+    font-weight: 500;
+}
+
+.headerLogo {
+    font-weight: 600;
+    font-size: large;
+}

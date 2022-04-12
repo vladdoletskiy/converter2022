@@ -1,0 +1,50 @@
+.converterWrapper {
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.converter {
+    width: 650px;
+    height: 450px;
+    background-color: #F8F8F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+  .out {
+    color: red;
+    font-weight: 500;
+  }
+
+  .switch {
+    color: #242629;;
+    z-index: 5;
+    padding: 0 20px;
+  }
+
+  .selects {
+      display: flex;
+      padding: 40px 0;
+  }
+
+
+
+  @media (max-width: 700px) {
+    .converter {
+        width: 350px;
+        height: 350px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .converter {
+        width: 300px;
+        height: 350px;
+    }
+  }
