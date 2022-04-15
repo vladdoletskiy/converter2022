@@ -13,9 +13,12 @@ const Converter = () => {
     const [from, setFrom] = useState('usd');
     const [to, setTo] = useState("eur");
     const [info, setInfo] = useState([]);
-    const [input, setInput] = useState(0);
+    const [input1, setInput1] = useState(0);
+    const [input2, setInput2] = useState(0);
+    const [output, setOutput] = useState();
     const [out, setOut] = useState(0);
     const [options, setOptions] = useState([]);
+    const [currency, setCurrency] = useState();
   
 
     useEffect(() => {
@@ -30,14 +33,16 @@ const Converter = () => {
 
   useEffect(() => {
     setOptions(Object.keys(info));
-    convert();
-  }, [info, to, from, input])
-    
+    // convert();
+    setCurrency(info[to]);
+    console.log(currency)
+  }, [info, to])
+
 
   const convert = () => {
     let rate = info[to];
-    setOut(input * rate);
-
+    // setCurrency(info[to]);
+    
   }
   
  
@@ -48,13 +53,31 @@ const Converter = () => {
   }
 
 
+  const getValue1 = (e) => {
+    setInput1(e.target.value);
+    // let rate = info[to];
+    setInput2(e.target.value * currency);
+    console.log(input1);
+  }
+
+  const getValue2 = (e) => {
+    setInput2(e.target.value);
+    // let rate = info[to];
+    setInput1(e.target.value * currency);
+    console.log(input2);
+}
+
+
   return (
     <div className='converterWrapper'>
 
 
         <div className='converter'> 
             <div className='converter-input' >
-                <Input onChange={(e) => setInput(e.target.value)} />
+                <Input onChange={getValue1} value={input1}/>
+            </div>
+            <div className='converter-input' >
+                <Input onChange={getValue2} value={input2}/>
             </div>
             
             <div className='selects'>  
@@ -62,7 +85,6 @@ const Converter = () => {
                 <div className="switch"><HiSwitchHorizontal size="30px"  onClick={flip}/> </div>
                 <Select options={options}  onChange={(e) => setTo(e.value)} value={to}/>
             </div>   
-            <div className='out'>{`${input} ${from} = ${out.toFixed(2)} ${to}`}</div>
         </div>
 
     </div>
