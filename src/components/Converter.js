@@ -15,10 +15,9 @@ const Converter = () => {
     const [info, setInfo] = useState([]);
     const [input1, setInput1] = useState(0);
     const [input2, setInput2] = useState(0);
-    const [output, setOutput] = useState();
-    const [out, setOut] = useState(0);
     const [options, setOptions] = useState([]);
-    const [currency, setCurrency] = useState();
+    const [currency, setCurrency] = useState(0);
+    const [convertValue, setConvertValue] = useState(0);
   
 
     useEffect(() => {
@@ -33,18 +32,17 @@ const Converter = () => {
 
   useEffect(() => {
     setOptions(Object.keys(info));
-    // convert();
     setCurrency(info[to]);
-    console.log(currency)
   }, [info, to])
 
+  useEffect(() => {
+   console.log('input1', input1);
+   console.log('input2', input2);
+   console.log('currency', currency);
+   console.log('convertValue', convertValue);
+  }, [input1, input2,currency])
 
-  const convert = () => {
-    let rate = info[to];
-    // setCurrency(info[to]);
-    
-  }
-  
+   
  
   const flip = () => {
     let temp = from;
@@ -55,17 +53,20 @@ const Converter = () => {
 
   const getValue1 = (e) => {
     setInput1(e.target.value);
-    // let rate = info[to];
     setInput2(e.target.value * currency);
-    console.log(input1);
+
   }
 
   const getValue2 = (e) => {
     setInput2(e.target.value);
-    // let rate = info[to];
     setInput1(e.target.value * currency);
-    console.log(input2);
+
 }
+
+// const convert = (input, currency) => {
+//     setConvertValue(input * currency);
+// }
+
 
 
   return (
@@ -79,7 +80,12 @@ const Converter = () => {
             <div className='converter-input' >
                 <Input onChange={getValue2} value={input2}/>
             </div>
-            
+            {/* <div className='converter-input' >
+                <Input onChange={(e) => setInput1(e.target.value)} value={input1}/>
+            </div>
+            <div className='converter-input' >
+                <Input onChange={(e) => setInput2(e.target.value)} value={input2}/>
+            </div> */}
             <div className='selects'>  
                 <Select options={options}  onChange={(e) => setFrom(e.value)} value={from} />
                 <div className="switch"><HiSwitchHorizontal size="30px"  onClick={flip}/> </div>
