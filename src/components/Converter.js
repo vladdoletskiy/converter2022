@@ -3,8 +3,8 @@ import './Converter.css'
 import {useEffect, useState} from 'react'
 import Input from '../UI/Input'
 import Select from '../UI/Select'
-import { HiSwitchHorizontal } from 'react-icons/hi';
-import 'react-dropdown/style.css';
+import { HiSwitchHorizontal } from 'react-icons/hi'
+import 'react-dropdown/style.css'
 import axios from 'axios'
 
 
@@ -15,10 +15,9 @@ const Converter = () => {
     const [info, setInfo] = useState([]);
     const [input1, setInput1] = useState(0);
     const [input2, setInput2] = useState(0);
-    const [output, setOutput] = useState();
-    const [out, setOut] = useState(0);
     const [options, setOptions] = useState([]);
-    const [currency, setCurrency] = useState();
+    const [currency, setCurrency] = useState(0);
+    const [convertValue, setConvertValue] = useState(0);
   
 
     useEffect(() => {
@@ -33,18 +32,21 @@ const Converter = () => {
 
   useEffect(() => {
     setOptions(Object.keys(info));
-    // convert();
     setCurrency(info[to]);
-    console.log(currency)
   }, [info, to])
 
+  useEffect(() => {
+   console.log('input1', input1);
+   console.log('input2', input2);
+   console.log('to', to);
+   console.log('from', from);
+   console.log('info', info);
 
-  const convert = () => {
-    let rate = info[to];
-    // setCurrency(info[to]);
-    
-  }
-  
+   console.log('currency', currency);
+   console.log('convertValue', convertValue);
+  }, [input1, input2,currency])
+
+   
  
   const flip = () => {
     let temp = from;
@@ -55,23 +57,22 @@ const Converter = () => {
 
   const getValue1 = (e) => {
     setInput1(e.target.value);
-    // let rate = info[to];
-    setInput2(e.target.value * currency);
-    console.log(input1);
+    let sum = e.target.value * currency;
+    setInput2(sum.toFixed(2));
+
   }
 
   const getValue2 = (e) => {
     setInput2(e.target.value);
-    // let rate = info[to];
-    setInput1(e.target.value * currency);
-    console.log(input2);
+    let sum = e.target.value * currency;
+    setInput1(sum.toFixed(2));
+  
+
 }
 
 
   return (
     <div className='converterWrapper'>
-
-
         <div className='converter'> 
             <div className='converter-input' >
                 <Input onChange={getValue1} value={input1}/>
@@ -79,7 +80,6 @@ const Converter = () => {
             <div className='converter-input' >
                 <Input onChange={getValue2} value={input2}/>
             </div>
-            
             <div className='selects'>  
                 <Select options={options}  onChange={(e) => setFrom(e.value)} value={from} />
                 <div className="switch"><HiSwitchHorizontal size="30px"  onClick={flip}/> </div>
