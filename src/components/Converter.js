@@ -3,8 +3,8 @@ import './Converter.css'
 import {useEffect, useState} from 'react'
 import Input from '../UI/Input'
 import Select from '../UI/Select'
-import { HiSwitchHorizontal } from 'react-icons/hi';
-import 'react-dropdown/style.css';
+import { HiSwitchHorizontal } from 'react-icons/hi'
+import 'react-dropdown/style.css'
 import axios from 'axios'
 
 
@@ -38,6 +38,10 @@ const Converter = () => {
   useEffect(() => {
    console.log('input1', input1);
    console.log('input2', input2);
+   console.log('to', to);
+   console.log('from', from);
+   console.log('info', info);
+
    console.log('currency', currency);
    console.log('convertValue', convertValue);
   }, [input1, input2,currency])
@@ -53,26 +57,22 @@ const Converter = () => {
 
   const getValue1 = (e) => {
     setInput1(e.target.value);
-    setInput2(e.target.value * currency);
+    let sum = e.target.value * currency;
+    setInput2(sum.toFixed(2));
 
   }
 
   const getValue2 = (e) => {
     setInput2(e.target.value);
-    setInput1(e.target.value * currency);
+    let sum = e.target.value * currency;
+    setInput1(sum.toFixed(2));
+  
 
 }
-
-// const convert = (input, currency) => {
-//     setConvertValue(input * currency);
-// }
-
 
 
   return (
     <div className='converterWrapper'>
-
-
         <div className='converter'> 
             <div className='converter-input' >
                 <Input onChange={getValue1} value={input1}/>
@@ -80,12 +80,6 @@ const Converter = () => {
             <div className='converter-input' >
                 <Input onChange={getValue2} value={input2}/>
             </div>
-            {/* <div className='converter-input' >
-                <Input onChange={(e) => setInput1(e.target.value)} value={input1}/>
-            </div>
-            <div className='converter-input' >
-                <Input onChange={(e) => setInput2(e.target.value)} value={input2}/>
-            </div> */}
             <div className='selects'>  
                 <Select options={options}  onChange={(e) => setFrom(e.value)} value={from} />
                 <div className="switch"><HiSwitchHorizontal size="30px"  onClick={flip}/> </div>
